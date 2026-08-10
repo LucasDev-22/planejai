@@ -83,6 +83,14 @@ export const HistoryPage = () => {
                 <button
                   type="button"
                   onClick={() => {
+                    const confirmed = window.confirm(
+                        'Tem certeza que deseja excluir esta simulação?',
+                    )
+
+                    if (!confirmed) {
+                        return
+                    }
+                    
                     deleteSimulation(simulation.id)
                     setSimulations(getAllSimulations())
                   }}
