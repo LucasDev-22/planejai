@@ -45,51 +45,76 @@ export const HistoryPage = () => {
           {simulations.map((simulation) => (
             <article
               key={simulation.id}
-              className="rounded-xl border p-5 shadow-sm"
+              className="flex flex-col rounded-xl border bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
             >
-              <h2 className="mb-4 text-xl font-semibold">
-                {simulation.goalName}
-              </h2>
-
-              <div className="grid gap-2 sm:grid-cols-3">
-                <p>
-                  <strong>Renda:</strong> {simulation.income}
-                </p>
-
-                <p>
-                  <strong>Custos:</strong> {simulation.expenses}
-                </p>
-
-                <p>
-                  <strong>Dívidas:</strong> {simulation.debts}
-                </p>
-
-                <p>
-                  <strong>Meta:</strong> {simulation.goalAmount}
-                </p>
-
-                <p>
-                  <strong>Prazo:</strong> {simulation.goalDeadline} meses
-                </p>
+              <div className="mb-4 flex items-center justify-between border-b pb-4">
+                <h2 className="text-xl font-semibold text-gray-900">
+                  {simulation.goalName}
+                </h2>
               </div>
 
-              <div className="mt-4 flex gap-2">
-                <Link
-                  to={`/resultado/${simulation.id}`}
-                  className="cursor-pointer rounded-lg border px-4 py-2 font-medium transition duration-150 hover:bg-gray-100 active:scale-95"
-                >
-                  Ver detalhes
-                </Link>
+              <div className="mb-6 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
+                <div className="flex flex-col">
+                  <span className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    Renda
+                  </span>
+                  <span className="mt-1 font-semibold text-gray-900">
+                    {simulation.income}
+                  </span>
+                </div>
 
+                <div className="flex flex-col">
+                  <span className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    Custos
+                  </span>
+                  <span className="mt-1 font-semibold text-gray-900">
+                    {simulation.expenses}
+                  </span>
+                </div>
+
+                <div className="flex flex-col">
+                  <span className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    Dívidas
+                  </span>
+                  <span className="mt-1 font-semibold text-gray-900">
+                    {simulation.debts}
+                  </span>
+                </div>
+
+                <div className="flex flex-col">
+                  <span className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    Meta
+                  </span>
+                  <span className="mt-1 font-semibold text-gray-900">
+                    {simulation.goalAmount}
+                  </span>
+                </div>
+
+                <div className="flex flex-col">
+                  <span className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    Prazo
+                  </span>
+                  <span className="mt-1 font-semibold text-gray-900">
+                    {simulation.goalDeadline} meses
+                  </span>
+                </div>
+              </div>
+
+              <div className="mt-auto flex items-center justify-end gap-3 pt-2">
                 <button
                   type="button"
-                  onClick={() => {
-                    setSimulationToDelete(simulation)
-                  }}
-                  className="cursor-pointer rounded-lg border px-4 py-2 font-medium transition duration-150 hover:bg-gray-100 active:scale-95"
+                  onClick={() => setSimulationToDelete(simulation)}
+                  className="cursor-pointer rounded-lg px-4 py-2 text-sm font-medium text-red-600 transition-colors duration-150 hover:bg-red-50 active:scale-95"
                 >
                   Excluir
                 </button>
+
+                <Link
+                  to={`/resultado/${simulation.id}`}
+                  className="cursor-pointer rounded-lg bg-violet-500 px-5 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-150 hover:bg-violet-600 active:scale-95"
+                >
+                  Ver detalhes
+                </Link>
               </div>
             </article>
           ))}
@@ -107,11 +132,11 @@ export const HistoryPage = () => {
               poderá ser desfeita.
             </p>
 
-            <div className="mt-6 flex justify-end gap-2">
+            <div className="mt-6 flex justify-end gap-3">
               <button
                 type="button"
                 onClick={() => setSimulationToDelete(null)}
-                className="cursor-pointer rounded-lg border px-4 py-2 font-medium transition duration-150 hover:bg-gray-100 active:scale-95"
+                className="cursor-pointer rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors duration-150 hover:bg-gray-50 active:scale-95"
               >
                 Cancelar
               </button>
@@ -120,10 +145,12 @@ export const HistoryPage = () => {
                 type="button"
                 onClick={() => {
                   deleteSimulation(simulationToDelete.id)
-                  setSimulations(getAllSimulations())
+                  setSimulations((prev) =>
+                    prev.filter((sim) => sim.id !== simulationToDelete.id),
+                  )
                   setSimulationToDelete(null)
                 }}
-                className="cursor-pointer rounded-lg border px-4 py-2 font-medium transition duration-150 hover:bg-gray-100 active:scale-95"
+                className="cursor-pointer rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-150 hover:bg-red-700 active:scale-95"
               >
                 Excluir
               </button>
