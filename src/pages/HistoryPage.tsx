@@ -10,6 +10,9 @@ export const HistoryPage = () => {
 
   const [simulations, setSimulations] = useState<SimulationRecord[]>([])
 
+  const [simulationToDelete, setSimulationToDelete] =
+    useState<SimulationRecord | null>(null)
+
   useEffect(() => {
     const savedSimulations = getAllSimulations()
     setSimulations(savedSimulations)
@@ -17,9 +20,7 @@ export const HistoryPage = () => {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-8">
-      <h1 className="mb-6 text-3xl font-bold">
-        Histórico de Simulações
-      </h1>
+      <h1 className="mb-6 text-3xl font-bold">Histórico de Simulações</h1>
 
       {simulations.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-xl border p-10 text-center">
@@ -83,16 +84,7 @@ export const HistoryPage = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    const confirmed = window.confirm(
-                        'Tem certeza que deseja excluir esta simulação?',
-                    )
-
-                    if (!confirmed) {
-                        return
-                    }
-                    
-                    deleteSimulation(simulation.id)
-                    setSimulations(getAllSimulations())
+                    setSimulationToDelete(simulation)
                   }}
                   className="cursor-pointer rounded-lg border px-4 py-2 font-medium transition duration-150 hover:bg-gray-100 active:scale-95"
                 >
@@ -101,6 +93,42 @@ export const HistoryPage = () => {
               </div>
             </article>
           ))}
+        </div>
+      )}
+
+      {simulationToDelete && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="w-full max-w-md rounded-xl border bg-white p-6 shadow-xl">
+            <h2 className="text-xl font-semibold">Excluir simulação?</h2>
+
+            <p className="mt-2 text-gray-500">
+              Tem certeza que deseja excluir a simulação de{' '}
+              <strong>{simulationToDelete.goalName}</strong>? Essa ação não
+              poderá ser desfeita.
+            </p>
+
+            <div className="mt-6 flex justify-end gap-2">
+              <button
+                type="button"
+                onClick={() => setSimulationToDelete(null)}
+                className="cursor-pointer rounded-lg border px-4 py-2 font-medium transition duration-150 hover:bg-gray-100 active:scale-95"
+              >
+                Cancelar
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  deleteSimulation(simulationToDelete.id)
+                  setSimulations(getAllSimulations())
+                  setSimulationToDelete(null)
+                }}
+                className="cursor-pointer rounded-lg border px-4 py-2 font-medium transition duration-150 hover:bg-gray-100 active:scale-95"
+              >
+                Excluir
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </main>
