@@ -35,7 +35,7 @@ export function ChatThread({ simulationId, insight }: ChatThreadProps) {
 
   return (
     <div className="flex flex-1 flex-col overflow-hidden">
-      <div className="scrollbar-thin flex-1 overflow-y-auto pr-2 [scrollbar-color:var(--border)_transparent]">
+      <div className="scrollbar-thin flex-1 overflow-y-auto px-6 pb-2 [scrollbar-color:var(--border)_transparent]">
         <Content insight={insight} />
 
         {messages.length > 0 && (
@@ -52,7 +52,6 @@ export function ChatThread({ simulationId, insight }: ChatThreadProps) {
               </div>
             ))}
 
-            {/* Indicador de Digitação / I/O Blocking */}
             {isLoading && (
               <div className="text-muted-foreground flex items-center gap-2 text-sm">
                 <Loader2 size={16} className="animate-spin" />
@@ -60,19 +59,16 @@ export function ChatThread({ simulationId, insight }: ChatThreadProps) {
               </div>
             )}
 
-            {/* Tratamento e Exibição de Falhas de Rede */}
             {error && <p className="text-sm text-red-500">{error.message}</p>}
           </div>
         )}
 
-        {/* Âncora invisível para o scroll automático */}
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input fixo, fora da área de scroll */}
       <form
         onSubmit={handleSend}
-        className="border-border mt-4 flex shrink-0 items-center gap-2 border-t pt-4"
+        className="border-border bg-card mt-2 flex shrink-0 items-center gap-2 border-t px-6 py-4"
       >
         <input
           type="text"
