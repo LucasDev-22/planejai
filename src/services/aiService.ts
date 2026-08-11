@@ -31,7 +31,7 @@ export interface InsightData {
 }
 
 const API_KEY = String(import.meta.env.VITE_GEMINI_API_KEY)
-const MODEL_NAME = 'gemini-1.5-flash' // Atualizado para suporte a systemInstruction e respostas rápidas
+const MODEL_NAME = 'gemini-flash-latest'
 const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${API_KEY}`
 
 /**

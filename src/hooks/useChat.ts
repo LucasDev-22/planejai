@@ -62,7 +62,7 @@ export const useChat = (simulationId: string) => {
 
         const finalHistory = [...optimisticHistory, modelMessage]
 
-        // 3. Persistência Final
+        // 3. Persistência Final (Em caso de SUCESSO)
         setMessages(finalHistory)
         updateSimulation(simulationId, {
           ...currentSimulation,
@@ -71,8 +71,14 @@ export const useChat = (simulationId: string) => {
         
       } catch (error) {
         console.error('Falha na orquestração do chat:', error)
-        // Em caso de falha severa da API, a mensagem do usuário continua no histórico,
-        // e o erro é repassado pela variável chatAction.error para a UI.
+        
+        // 4. Rollback Transacional (Em caso de FALHA)
+        // Remove a mensagem órfã da UI e do cache local para não corromper o array da API
+        setMessages(previousHistory)
+        updateSimulation(simulationId, {
+          ...currentSimulation,
+          chatHistory: previousHistory,
+        } as SimulationRecord)
       }
     },
     [simulationId, getFormData, updateSimulation, chatAction]
