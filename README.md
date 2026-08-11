@@ -40,7 +40,7 @@ Tudo roda 100% no navegador: sem backend e sem banco de dados. Os dados ficam sa
 | Tailwind CSS | 4.2.2 | Estilização (config *CSS-first*, via `@theme`) |
 | Google Gemini API | `gemini-flash-latest` | IA generativa, consumida via REST puro (sem SDK) |
 | Lucide React | 1.5.0 | Ícones |
-| react-loading-skeleton | ^3.5.0 | Estado de carregamento do insight |
+| react-loading-skeleton | 3.5.0 | Estado de carregamento do insight |
 
 **Desenvolvimento:** ESLint 9 + `typescript-eslint`, Prettier (com `prettier-plugin-tailwindcss`), `eslint-plugin-simple-import-sort` e `eslint-plugin-unused-imports` para manter os imports organizados.
 
