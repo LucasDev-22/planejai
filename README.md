@@ -31,13 +31,13 @@ Tudo roda 100% no navegador: sem backend e sem banco de dados. Os dados ficam sa
 
 | Pacote | Versão | Uso |
 |---|---|---|
-| React | ^19.2.4 | Interface |
-| TypeScript | ~5.9.3 | Tipagem estática |
-| Vite | ^8.0.1 | Build e dev server |
-| React Router DOM | ^7.13.2 | Roteamento (`/`, `/resultado/:id`, `/historico`) |
-| Tailwind CSS | ^4.2.2 | Estilização (config *CSS-first*, via `@theme`) |
+| React | 19.2.4 | Interface |
+| TypeScript | 5.9.3 | Tipagem estática |
+| Vite | 8.0.1 | Build e dev server |
+| React Router DOM | 7.13.2 | Roteamento (`/`, `/resultado/:id`, `/historico`) |
+| Tailwind CSS | 4.2.2 | Estilização (config *CSS-first*, via `@theme`) |
 | Google Gemini API | `gemini-flash-latest` | IA generativa, consumida via REST puro (sem SDK) |
-| Lucide React | ^1.5.0 | Ícones |
+| Lucide React | 1.5.0 | Ícones |
 | react-loading-skeleton | ^3.5.0 | Estado de carregamento do insight |
 
 **Desenvolvimento:** ESLint 9 + `typescript-eslint`, Prettier (com `prettier-plugin-tailwindcss`), `eslint-plugin-simple-import-sort` e `eslint-plugin-unused-imports` para manter os imports organizados.
