@@ -6,8 +6,11 @@ O usuário responde um formulário guiado sobre sua renda, custos fixos, dívida
 
 Tudo roda 100% no navegador: sem backend e sem banco de dados. Os dados ficam salvos no `localStorage`.
 
-> 📸 *Adicione aqui um GIF ou screenshots do fluxo (formulário → resultado → chat) para dar contexto visual a quem for ler o repositório.*
-
+> 📸 *Screenshots do fluxo (formulário → resultado → chat).*
+<p align="center">
+  <img src="src/assets/images/nova-simulacao-1.png" width="60%" alt="Interface Desktop">
+  <img src="src/assets/images/resultado-simulacao.png" width="25%" alt="Resultado">
+</p>
 ---
 
 ## 🎯 Funcionalidades

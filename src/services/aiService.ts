@@ -91,7 +91,8 @@ O usuário está consultando a seguinte simulação:
 - Custos Fixos: R$ ${simulation.expenses}
 - Dívidas: R$ ${simulation.debts}
 
-Forneça respostas claras, objetivas, analíticas e empáticas. Foque em educação financeira prática.`,
+Forneça respostas claras, objetivas, analíticas e empáticas. Foque em educação financeira prática.
+Responda sempre em texto corrido, sem usar markdown (sem **negrito**, sem títulos, sem listas com asteriscos ou hífens).`,
       },
     ],
   }

@@ -1,17 +1,15 @@
+import { ExternalLink, Target, Trash2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
-
 import { Link } from 'react-router-dom'
 
-import { useSimulationStorage } from '@/hooks/useSimulationStorage'
 import type { SimulationRecord } from '@/data/simulation'
+import { useSimulationStorage } from '@/hooks/useSimulationStorage'
 
 export const HistoryPage = () => {
   const { getAllSimulations, deleteSimulation } = useSimulationStorage()
 
   const [simulations, setSimulations] = useState<SimulationRecord[]>([])
-
-  const [simulationToDelete, setSimulationToDelete] =
-    useState<SimulationRecord | null>(null)
+  const [simulationToDelete, setSimulationToDelete] = useState<SimulationRecord | null>(null)
 
   useEffect(() => {
     const savedSimulations = getAllSimulations()
@@ -20,22 +18,22 @@ export const HistoryPage = () => {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-8">
-      <h1 className="mb-6 text-3xl font-bold">Histórico de Simulações</h1>
+      <h1 className="text-foreground mb-1 text-3xl font-bold">Histórico de simulações</h1>
+      <p className="text-muted-foreground mb-8 text-sm">
+        Acompanhe o histórico de seus planos financeiros.
+      </p>
 
       {simulations.length === 0 ? (
-        <div className="flex flex-col items-center justify-center rounded-xl border p-10 text-center">
-          <h2 className="text-xl font-semibold">
+        <div className="border-border bg-card flex flex-col items-center justify-center rounded-2xl border p-10 text-center shadow-sm">
+          <h2 className="text-foreground text-xl font-semibold">
             Nenhuma simulação encontrada
           </h2>
-
-          <p className="mt-2 text-gray-500">
-            Crie uma simulação para começar a acompanhar seus objetivos
-            financeiros.
+          <p className="text-muted-foreground mt-2">
+            Crie uma simulação para começar a acompanhar seus objetivos financeiros.
           </p>
-
           <Link
             to="/"
-            className="mt-6 cursor-pointer rounded-lg border px-4 py-2 font-medium transition duration-150 hover:bg-gray-100 active:scale-95"
+            className="bg-primary text-primary-foreground mt-6 cursor-pointer rounded-xl px-5 py-2.5 font-medium shadow-sm transition duration-150 hover:opacity-90 active:scale-95"
           >
             Nova simulação
           </Link>
@@ -45,75 +43,66 @@ export const HistoryPage = () => {
           {simulations.map((simulation) => (
             <article
               key={simulation.id}
-              className="flex flex-col rounded-xl border bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+              className="bg-card border-border flex flex-col rounded-2xl border p-5 shadow-sm transition-all md:flex-row md:items-center md:justify-between md:gap-6 md:p-6"
             >
-              <div className="mb-4 flex items-center justify-between border-b pb-4">
-                <h2 className="text-xl font-semibold text-gray-900">
-                  {simulation.goalName}
-                </h2>
+              {/* Seção Esquerda: Ícone e Título */}
+              <div className="flex items-center gap-4">
+                <div className="bg-primary/10 text-primary flex h-12 w-12 shrink-0 items-center justify-center rounded-xl">
+                  <Target size={24} />
+                </div>
+                <div>
+                  <h3 className="text-foreground text-lg font-semibold">{simulation.goalName}</h3>
+                  <span className="text-muted-foreground text-xs">Simulação salva</span>
+                </div>
               </div>
 
-              <div className="mb-6 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
+              {/* Seção Central: Métricas (Custo, Prazo, Renda) */}
+              <div className="border-border my-4 grid grid-cols-3 gap-2 border-y py-4 md:my-0 md:flex md:items-center md:gap-8 md:border-0 md:py-0">
                 <div className="flex flex-col">
-                  <span className="text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Renda
+                  <span className="text-muted-foreground text-[10px] font-medium tracking-wider uppercase">
+                    Custo da Meta
                   </span>
-                  <span className="mt-1 font-semibold text-gray-900">
-                    {simulation.income}
-                  </span>
-                </div>
-
-                <div className="flex flex-col">
-                  <span className="text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Custos
-                  </span>
-                  <span className="mt-1 font-semibold text-gray-900">
-                    {simulation.expenses}
-                  </span>
-                </div>
-
-                <div className="flex flex-col">
-                  <span className="text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Dívidas
-                  </span>
-                  <span className="mt-1 font-semibold text-gray-900">
-                    {simulation.debts}
-                  </span>
-                </div>
-
-                <div className="flex flex-col">
-                  <span className="text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Meta
-                  </span>
-                  <span className="mt-1 font-semibold text-gray-900">
+                  <span className="text-foreground mt-1 text-sm font-semibold">
                     {simulation.goalAmount}
                   </span>
                 </div>
 
                 <div className="flex flex-col">
-                  <span className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+                  <span className="text-muted-foreground text-[10px] font-medium tracking-wider uppercase">
                     Prazo
                   </span>
-                  <span className="mt-1 font-semibold text-gray-900">
+                  <span className="text-foreground mt-1 text-sm font-semibold">
                     {simulation.goalDeadline} meses
+                  </span>
+                </div>
+
+                <div className="flex flex-col">
+                  <span className="text-muted-foreground text-[10px] font-medium tracking-wider uppercase">
+                    Renda Mensal
+                  </span>
+                  <span className="text-foreground mt-1 text-sm font-semibold">
+                    {simulation.income}
                   </span>
                 </div>
               </div>
 
-              <div className="mt-auto flex items-center justify-end gap-3 pt-2">
+              {/* Seção Direita: Ações (Lixeira e Ver Detalhes) */}
+              <div className="border-border flex items-center justify-between border-t pt-4 md:justify-end md:gap-4 md:border-0 md:pt-0">
                 <button
                   type="button"
                   onClick={() => setSimulationToDelete(simulation)}
-                  className="cursor-pointer rounded-lg px-4 py-2 text-sm font-medium text-red-600 transition-colors duration-150 hover:bg-red-50 active:scale-95"
+                  className="text-muted-foreground hover:bg-muted cursor-pointer rounded-lg p-2 transition-colors hover:text-red-500 active:scale-95"
+                  aria-label="Excluir simulação"
                 >
-                  Excluir
+                  <Trash2 size={20} />
                 </button>
 
                 <Link
                   to={`/resultado/${simulation.id}`}
-                  className="cursor-pointer rounded-lg bg-violet-500 px-5 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-150 hover:bg-violet-600 active:scale-95"
+                  className="border-border text-foreground hover:bg-muted flex cursor-pointer items-center gap-2 rounded-xl border px-4 py-2 text-xs font-medium transition-colors active:scale-95"
                 >
-                  Ver detalhes
+                  <span>Ver detalhes</span>
+                  <ExternalLink size={14} />
                 </Link>
               </div>
             </article>
@@ -121,22 +110,23 @@ export const HistoryPage = () => {
         </div>
       )}
 
+      {/* Modal de Exclusão Adaptado para Dark Mode */}
       {simulationToDelete && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="w-full max-w-md rounded-xl border bg-white p-6 shadow-xl">
-            <h2 className="text-xl font-semibold">Excluir simulação?</h2>
-
-            <p className="mt-2 text-gray-500">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
+          <div className="border-border bg-card w-full max-w-md rounded-2xl border p-6 shadow-xl">
+            <h2 className="text-foreground text-xl font-semibold">Excluir simulação?</h2>
+            
+            <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
               Tem certeza que deseja excluir a simulação de{' '}
-              <strong>{simulationToDelete.goalName}</strong>? Essa ação não
-              poderá ser desfeita.
+              <strong className="text-foreground">{simulationToDelete.goalName}</strong>? 
+              Essa ação não poderá ser desfeita.
             </p>
 
-            <div className="mt-6 flex justify-end gap-3">
+            <div className="mt-8 flex justify-end gap-3">
               <button
                 type="button"
                 onClick={() => setSimulationToDelete(null)}
-                className="cursor-pointer rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors duration-150 hover:bg-gray-50 active:scale-95"
+                className="border-border text-foreground hover:bg-muted cursor-pointer rounded-xl border bg-transparent px-4 py-2 text-sm font-medium transition-colors duration-150 active:scale-95"
               >
                 Cancelar
               </button>
@@ -150,7 +140,7 @@ export const HistoryPage = () => {
                   )
                   setSimulationToDelete(null)
                 }}
-                className="cursor-pointer rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-150 hover:bg-red-700 active:scale-95"
+                className="cursor-pointer rounded-xl bg-red-600 px-5 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-150 hover:bg-red-700 active:scale-95"
               >
                 Excluir
               </button>
