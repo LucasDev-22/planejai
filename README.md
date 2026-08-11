@@ -10,7 +10,7 @@ Tudo roda 100% no navegador: sem backend e sem banco de dados. Os dados ficam sa
 
 ![Formulário de Simulação](src/assets/images/nova-simulacao-1.png)
 
-![Resultado e Diagnóstico](src/assets/images/resultado-simulacao.png)
+![Resultado](src/assets/images/resultado-simulacao.png)
 
 ## 🎯 Funcionalidades
 
