@@ -14,6 +14,8 @@ import { PageHero } from '@/components/shared/PageHero'
 import { useSimulationStorage } from '@/hooks/useSimulationStorage'
 import { calcMonthlySavings } from '@/utils/simulation'
 
+import { ChatWidget } from '@/components/features/Chat/ChatWidget'
+
 export function SimulationResultsPage() {
   const { id } = useParams<{ id: string }>()
   const { getFormData } = useSimulationStorage()
@@ -76,6 +78,8 @@ export function SimulationResultsPage() {
           />
         </div>
       </div>
+      {/* Injeção do Widget (com o ID da simulação atual) */}
+      <ChatWidget simulationId={data.id} />
     </main>
   )
 }
