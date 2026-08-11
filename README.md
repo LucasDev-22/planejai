@@ -8,10 +8,9 @@ Tudo roda 100% no navegador: sem backend e sem banco de dados. Os dados ficam sa
 
 > 📸 *Screenshots do fluxo (formulário → resultado → chat).*
 
-<p align="center">
-  <img src="src/assets/images/nova-simulacao-1.png" width="49%" alt="Formulário de Simulação">
-  <img src="src/assets/images/resultado-simulacao.png" width="49%" alt="Resultado e Diagnóstico">
-</p>
+![Formulário de Simulação](src/assets/images/nova-simulacao-1.png)
+
+![Resultado e Diagnóstico](src/assets/images/resultado-simulacao.png)
 
 ## 🎯 Funcionalidades
 
